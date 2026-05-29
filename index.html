@@ -8,18 +8,16 @@
     <meta name="description" content="Xenon — A sleek, modern hub for games, apps, and more.">
     <meta name="keywords" content="Xenon, Games, Apps, Hub">
     <meta name="author" content="Xenon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
             --bg-deep: #0a0a0f;
             --bg-card: #12121a;
             --bg-hover: #1a1a28;
             --accent: #00d4ff;
-            --accent-glow: rgba(0, 212, 255, 0.3);
-            --accent-secondary: #7c3aed;
             --text-primary: #e8e8f0;
             --text-secondary: #8b8ba3;
             --border: rgba(255, 255, 255, 0.06);
@@ -40,7 +38,7 @@
             overflow-x: hidden;
         }
 
-        /* Animated background grid */
+        /* Subtle grid background */
         body::before {
             content: '';
             position: fixed;
@@ -51,39 +49,6 @@
             background-size: 60px 60px;
             pointer-events: none;
             z-index: 0;
-        }
-
-        /* Floating orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-            z-index: 0;
-            animation: floatOrb 20s ease-in-out infinite;
-        }
-        .orb-1 {
-            width: 400px; height: 400px;
-            background: rgba(0, 212, 255, 0.08);
-            top: -100px; right: -100px;
-            animation-delay: 0s;
-        }
-        .orb-2 {
-            width: 300px; height: 300px;
-            background: rgba(124, 58, 237, 0.08);
-            bottom: -80px; left: 100px;
-            animation-delay: -7s;
-        }
-        .orb-3 {
-            width: 250px; height: 250px;
-            background: rgba(0, 212, 255, 0.05);
-            top: 40%; left: 30%;
-            animation-delay: -14s;
-        }
-        @keyframes floatOrb {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -40px) scale(1.1); }
-            66% { transform: translate(-20px, 30px) scale(0.95); }
         }
 
         /* Sidebar */
@@ -109,7 +74,6 @@
             font-weight: 900;
             font-size: 22px;
             color: var(--accent);
-            text-shadow: 0 0 20px var(--accent-glow);
             margin-bottom: 40px;
             letter-spacing: 2px;
             cursor: default;
@@ -139,7 +103,6 @@
             border-radius: 14px;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 20px;
             position: relative;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
@@ -159,7 +122,7 @@
         .nav-links a.active {
             color: var(--accent);
             background: var(--bg-hover);
-            box-shadow: 0 0 20px var(--accent-glow), inset 0 0 0 1px rgba(0, 212, 255, 0.15);
+            box-shadow: inset 0 0 0 1px rgba(0, 212, 255, 0.15);
         }
 
         .nav-links a:hover::before,
@@ -167,13 +130,17 @@
             opacity: 0.08;
         }
 
-        .nav-links a i {
+        .nav-links a i,
+        .nav-links a svg {
             position: relative;
             z-index: 1;
             transition: transform 0.25s ease;
+            width: 20px;
+            height: 20px;
         }
 
-        .nav-links a:hover i {
+        .nav-links a:hover i,
+        .nav-links a:hover svg {
             transform: scale(1.15);
         }
 
@@ -253,7 +220,6 @@
             height: 6px;
             background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent);
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -268,10 +234,7 @@
             font-weight: 900;
             line-height: 1.05;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             animation: fadeInUp 0.8s ease 0.15s both;
             letter-spacing: -1px;
         }
@@ -309,14 +272,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            color: #fff;
-            box-shadow: 0 4px 30px rgba(0, 212, 255, 0.3);
+            background: var(--accent);
+            color: var(--bg-deep);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(0, 212, 255, 0.4);
+            background: #33ddff;
         }
 
         .btn-secondary {
@@ -386,8 +348,11 @@
             animation: bounce 2s ease-in-out infinite;
         }
 
-        .scroll-hint i {
+        .scroll-hint i,
+        .scroll-hint svg {
             font-size: 16px;
+            width: 16px;
+            height: 16px;
         }
 
         @keyframes bounce {
@@ -430,23 +395,19 @@
     </style>
 </head>
 <body>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
     <aside class="sidebar">
         <div class="logo">X</div>
         <ul class="nav-links">
-            <li><a href="index" data-label="Home" class="active"><i class="fas fa-home"></i></a></li>
-            <li><a href="games" data-label="Games"><i class="fas fa-gamepad"></i></a></li>
-            <li><a href="apps" data-label="Apps"><i class="fas fa-layer-group"></i></a></li>
-            <li><a href="links" data-label="Links"><i class="fa-solid fa-link"></i></a></li>
+            <li><a href="index" data-label="Home" class="active"><i data-lucide="home"></i></a></li>
+            <li><a href="games" data-label="Games"><i data-lucide="gamepad-2"></i></a></li>
+            <li><a href="apps" data-label="Apps"><i data-lucide="layers"></i></a></li>
+            <li><a href="links" data-label="Links"><i data-lucide="link"></i></a></li>
             <li><div class="nav-divider"></div></li>
-            <li><a href="https://discord.gg/6GewnXsjwB" data-label="Discord" target="_blank"><i class="fa-brands fa-discord"></i></a></li>
-            <li><a href="https://play.szvy.win/embed.html#https://www5.cbox.ws/box/?boxid=955149&boxtag=tkebzb" data-label="Chat" target="_blank"><i class="fa-brands fa-rocketchat"></i></a></li>
-            <li><a href="partners" data-label="Partners"><i class="fas fa-handshake"></i></a></li>
-            <li><a href="extra" data-label="Extra"><i class="fas fa-ellipsis"></i></a></li>
-            <li><a href="settings" data-label="Settings"><i class="fa-solid fa-gear"></i></a></li>
+            <li><a href="https://discord.gg/6GewnXsjwB" data-label="Discord" target="_blank"><i data-lucide="message-circle"></i></a></li>
+            <li><a href="https://play.szvy.win/embed.html#https://www5.cbox.ws/box/?boxid=955149&boxtag=tkebzb" data-label="Chat" target="_blank"><i data-lucide="message-square"></i></a></li>
+            <li><a href="partners" data-label="Partners"><i data-lucide="handshake"></i></a></li>
+            <li><a href="extra" data-label="Extra"><i data-lucide="more-horizontal"></i></a></li>
+            <li><a href="settings" data-label="Settings"><i data-lucide="settings"></i></a></li>
         </ul>
     </aside>
 
@@ -460,11 +421,11 @@
             <p>Your gateway to games, apps, and everything in between. Built for speed, designed for you.</p>
             <div class="hero-actions">
                 <a href="games" class="btn btn-primary">
-                    <i class="fas fa-gamepad"></i>
+                    <i data-lucide="gamepad-2"></i>
                     Explore Games
                 </a>
                 <a href="apps" class="btn btn-secondary">
-                    <i class="fas fa-layer-group"></i>
+                    <i data-lucide="layers"></i>
                     Browse Apps
                 </a>
             </div>
@@ -487,8 +448,12 @@
 
         <div class="scroll-hint">
             <span>Scroll</span>
-            <i class="fas fa-chevron-down"></i>
+            <i data-lucide="chevron-down"></i>
         </div>
     </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
