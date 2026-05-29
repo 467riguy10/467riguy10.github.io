@@ -40,7 +40,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background grid */
         body::before {
             content: '';
             position: fixed;
@@ -53,7 +52,6 @@
             z-index: 0;
         }
 
-        /* Floating orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -86,7 +84,6 @@
             66% { transform: translate(-20px, 30px) scale(0.95); }
         }
 
-        /* Sidebar */
         .sidebar {
             position: fixed;
             left: 0;
@@ -125,9 +122,7 @@
             flex: 1;
         }
 
-        .nav-links li {
-            width: 100%;
-        }
+        .nav-links li { width: 100%; }
 
         .nav-links a {
             display: flex;
@@ -172,9 +167,7 @@
             transition: transform 0.25s ease;
         }
 
-        .nav-links a:hover i {
-            transform: scale(1.15);
-        }
+        .nav-links a:hover i { transform: scale(1.15); }
 
         .nav-links a::after {
             content: attr(data-label);
@@ -210,7 +203,6 @@
             margin: 12px 0;
         }
 
-        /* Main Content */
         .main {
             margin-left: var(--nav-width);
             padding: 40px;
@@ -241,7 +233,6 @@
             margin-top: 8px;
         }
 
-        /* Search bar */
         .search-bar {
             display: flex;
             align-items: center;
@@ -276,14 +267,12 @@
             width: 100%;
         }
 
-        .search-bar input::placeholder {
-            color: var(--text-secondary);
-        }
+        .search-bar input::placeholder { color: var(--text-secondary); }
 
         /* Games Grid */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             animation: fadeInUp 0.6s ease 0.2s both;
         }
@@ -292,13 +281,11 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 18px;
-            padding: 24px 20px;
-            text-align: center;
+            overflow: hidden;
             text-decoration: none;
             color: var(--text-primary);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
             cursor: pointer;
             display: block;
         }
@@ -310,6 +297,8 @@
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.06), rgba(124, 58, 237, 0.06));
             opacity: 0;
             transition: opacity 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .game-card:hover {
@@ -318,42 +307,41 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 212, 255, 0.08);
         }
 
-        .game-card:hover::before {
-            opacity: 1;
+        .game-card:hover::before { opacity: 1; }
+
+        .game-card .thumb {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.4s ease;
         }
 
-        .game-card .icon-wrap {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 28px;
+        .game-card:hover .thumb { transform: scale(1.05); }
+
+        .game-card .info {
+            padding: 14px 16px;
             position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+            z-index: 2;
         }
 
         .game-card p {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            position: relative;
-            z-index: 1;
             margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .game-card .play-hint {
             font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 6px;
+            color: var(--accent);
+            margin-top: 4px;
             opacity: 0;
             transform: translateY(4px);
             transition: all 0.25s ease;
-            position: relative;
-            z-index: 1;
         }
 
         .game-card:hover .play-hint {
@@ -372,7 +360,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
             .sidebar {
                 width: 100%;
@@ -406,12 +393,6 @@
             .games-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
-            }
-            .game-card { padding: 16px 12px; }
-            .game-card .icon-wrap {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
             }
         }
     </style>
@@ -449,29 +430,121 @@
         </div>
 
         <div class="games-grid" id="gamesGrid">
-            <a href="g/slope/" class="game-card"><div class="icon-wrap"><i class="fas fa-mountain"></i></div><p>Slope</p><div class="play-hint">Click to Play</div></a>
-            <a href="/polytrack/" class="game-card"><div class="icon-wrap"><i class="fas fa-road"></i></div><p>Polytrack</p><div class="play-hint">Click to Play</div></a>
-            <a href="" class="game-card"><div class="icon-wrap"><i class="fas fa-basketball"></i></div><p>Basket Random</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-futbol"></i></div><p>Soccer Random</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-volleyball"></i></div><p>Volley Random</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-boxing-glove"></i></div><p>Boxing Random</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-th"></i></div><p>2048</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-terminal"></i></div><p>xx142-b2exe</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-clock"></i></div><p>10 Minutes Till Dawn</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-fire"></i></div><p>A Dance Of Fire And Ice</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-ban"></i></div><p>There Is No Game</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-futbol"></i></div><p>1 On 1 Soccer</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-cookie"></i></div><p>Cookie Clicker</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-user"></i></div><p>Bitlife</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-snowflake"></i></div><p>Snow Rider 3D</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-users"></i></div><p>Red Vs Bluez</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-skull"></i></div><p>Horde Killer</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-rocket"></i></div><p>2D Rocket League</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-cubes"></i></div><p>Cluster Rush</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-ice-cream"></i></div><p>Bad Ice Cream</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-stopwatch"></i></div><p>Time Shooter 3</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-cube"></i></div><p>CubeField V2</p><div class="play-hint">Click to Play</div></a>
-            <a href="1.html" class="game-card"><div class="icon-wrap"><i class="fas fa-shapes"></i></div><p>Geometry Dash Lite</p><div class="play-hint">Click to Play</div></a>
+            <a href="g/slope/" class="game-card">
+                <img src="images/games/slope.png" alt="Slope" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-mountain" style="color:#fff;"></i></div>
+                <div class="info"><p>Slope</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="polytrack.html" class="game-card">
+                <img src="images/games/polytrack.png" alt="Polytrack" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-road" style="color:#fff;"></i></div>
+                <div class="info"><p>Polytrack</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="" class="game-card">
+                <img src="images/games/basket-random.png" alt="Basket Random" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-basketball" style="color:#fff;"></i></div>
+                <div class="info"><p>Basket Random</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/soccer-random.png" alt="Soccer Random" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-futbol" style="color:#fff;"></i></div>
+                <div class="info"><p>Soccer Random</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/volley-random.png" alt="Volley Random" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-volleyball" style="color:#fff;"></i></div>
+                <div class="info"><p>Volley Random</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/boxing-random.png" alt="Boxing Random" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-boxing-glove" style="color:#fff;"></i></div>
+                <div class="info"><p>Boxing Random</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/2048.png" alt="2048" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-th" style="color:#fff;"></i></div>
+                <div class="info"><p>2048</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/xx142-b2exe.png" alt="xx142-b2exe" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-terminal" style="color:#fff;"></i></div>
+                <div class="info"><p>xx142-b2exe</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/10-minutes-till-dawn.png" alt="10 Minutes Till Dawn" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-clock" style="color:#fff;"></i></div>
+                <div class="info"><p>10 Minutes Till Dawn</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/a-dance-of-fire-and-ice.png" alt="A Dance Of Fire And Ice" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-fire" style="color:#fff;"></i></div>
+                <div class="info"><p>A Dance Of Fire And Ice</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/there-is-no-game.png" alt="There Is No Game" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-ban" style="color:#fff;"></i></div>
+                <div class="info"><p>There Is No Game</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/1-on-1-soccer.png" alt="1 On 1 Soccer" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-futbol" style="color:#fff;"></i></div>
+                <div class="info"><p>1 On 1 Soccer</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/cookie-clicker.png" alt="Cookie Clicker" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-cookie" style="color:#fff;"></i></div>
+                <div class="info"><p>Cookie Clicker</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/bitlife.png" alt="Bitlife" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-user" style="color:#fff;"></i></div>
+                <div class="info"><p>Bitlife</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/snow-rider-3d.png" alt="Snow Rider 3D" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-snowflake" style="color:#fff;"></i></div>
+                <div class="info"><p>Snow Rider 3D</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/red-vs-bluez.png" alt="Red Vs Bluez" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-users" style="color:#fff;"></i></div>
+                <div class="info"><p>Red Vs Bluez</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/horde-killer.png" alt="Horde Killer" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-skull" style="color:#fff;"></i></div>
+                <div class="info"><p>Horde Killer</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/2d-rocket-league.png" alt="2D Rocket League" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-rocket" style="color:#fff;"></i></div>
+                <div class="info"><p>2D Rocket League</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/cluster-rush.png" alt="Cluster Rush" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-cubes" style="color:#fff;"></i></div>
+                <div class="info"><p>Cluster Rush</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/bad-ice-cream.png" alt="Bad Ice Cream" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-ice-cream" style="color:#fff;"></i></div>
+                <div class="info"><p>Bad Ice Cream</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/time-shooter-3.png" alt="Time Shooter 3" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-stopwatch" style="color:#fff;"></i></div>
+                <div class="info"><p>Time Shooter 3</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/cubefield-v2.png" alt="CubeField V2" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-cube" style="color:#fff;"></i></div>
+                <div class="info"><p>CubeField V2</p><div class="play-hint">Click to Play</div></div>
+            </a>
+            <a href="1.html" class="game-card">
+                <img src="images/games/geometry-dash-lite.png" alt="Geometry Dash Lite" class="thumb" onerror="this.style.display='none';this.parentElement.querySelector('.fallback').style.display='flex';">
+                <div class="fallback" style="display:none;width:100%;aspect-ratio:16/10;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));font-size:28px;"><i class="fas fa-shapes" style="color:#fff;"></i></div>
+                <div class="info"><p>Geometry Dash Lite</p><div class="play-hint">Click to Play</div></div>
+            </a>
         </div>
     </main>
 
